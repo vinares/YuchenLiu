@@ -29,7 +29,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
       <div className="grid place-items-center py-8">
         {loading || !profile ? (
           <div className="avatar opacity-90">
-            <div className="mb-8 rounded-full w-32 h-32">
+            <div className="mb-8 rounded-full w-56 h-56">
               {skeleton({
                 widthCls: 'w-full',
                 heightCls: 'h-full',
@@ -40,7 +40,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
         ) : (
           <div className="avatar opacity-90">
             <div
-              className={`mb-8 rounded-full w-32 h-32 ${
+              className={`mb-8 rounded-full w-56 h-56 ${
                 avatarRing
                   ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
                   : ''
@@ -48,7 +48,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
             >
               {
                 <LazyImage
-                  src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
+                  src={FALLBACK_IMAGE}
                   alt={profile.name}
                   placeholder={skeleton({
                     widthCls: 'w-full',

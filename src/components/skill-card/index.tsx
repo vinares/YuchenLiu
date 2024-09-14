@@ -12,7 +12,7 @@ const SkillCard = ({
     for (let index = 0; index < 12; index++) {
       array.push(
         <div key={index}>
-          {skeleton({ widthCls: 'w-16', heightCls: 'h-4', className: 'm-1' })}
+          {skeleton({ widthCls: 'w-24', heightCls: 'h-6', className: 'm-1' })}
         </div>,
       );
     }

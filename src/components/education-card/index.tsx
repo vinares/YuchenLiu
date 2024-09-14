@@ -36,15 +36,18 @@ const EducationCard = ({
         <ListItem
           key={index}
           time={skeleton({
-            widthCls: 'w-5/12',
-            heightCls: 'h-4',
+            widthCls: 'w-3/4',  // Increased width for clarity
+            heightCls: 'h-6',   // Increased height for clarity
           })}
           degree={skeleton({
-            widthCls: 'w-6/12',
-            heightCls: 'h-4',
-            className: 'my-1.5',
+            widthCls: 'w-3/4',  // Increased width for clarity
+            heightCls: 'h-6',   // Increased height for clarity
+            className: 'my-2',  // Increased margin for spacing
           })}
-          institution={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          institution={skeleton({
+            widthCls: 'w-3/4',  // Increased width for clarity
+            heightCls: 'h-5',   // Increased height for clarity
+          })}
         />,
       );
     }

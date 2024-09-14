@@ -2,32 +2,35 @@
 
 const CONFIG = {
   github: {
-    username: 'arifszn', // Your GitHub org/user name. (This is the only required config)
+    username: 'vinares', // Your GitHub org/user name. (This is the only required config)
   },
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/arifszn/arifszn.github.io, set base to '/'.
    * If you are deploying to https://<USERNAME>.github.io/<REPO_NAME>/,
    * for example your repository is at https://github.com/arifszn/portfolio, then set base to '/portfolio/'.
    */
-  base: '/gitprofile/',
+  base: '/YuchenLiu/',
   projects: {
     github: {
       display: true, // Display GitHub projects?
       header: 'Github Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
-        sortBy: 'stars', // Sort projects by 'stars' or 'updated'
+        sortBy: 'updated', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
         exclude: {
           forks: false, // Forked projects will not be displayed if set to true.
           projects: [], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
         },
       },
+      /*
       manual: {
         // Properties for manually specifying projects
         projects: ['arifszn/gitprofile', 'arifszn/pandora'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']
       },
+      */
     },
+    /*
     external: {
       header: 'My Projects',
       // To hide the `External Projects` section, keep it empty.
@@ -50,70 +53,78 @@ const CONFIG = {
         },
       ],
     },
+    */
   },
   seo: {
-    title: 'Portfolio of Ariful Alam',
+    title: 'Yuchen Liu',
     description: '',
     imageURL: '',
   },
   social: {
-    linkedin: 'ariful-alam',
-    twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    linkedin: 'lycty',
+    twitter: '',
+    mastodon: '',
     researchGate: '',
     facebook: '',
-    instagram: '',
+    instagram: 'liou_yuchen',
     reddit: '',
     threads: '',
     youtube: '', // example: 'pewdiepie'
     udemy: '',
     dribbble: '',
     behance: '',
-    medium: 'arifszn',
-    dev: 'arifszn',
+    medium: '',
+    dev: '',
     stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
-    website: 'https://www.arifszn.com',
+    website: 'https://vinares.github.io/YuchenLiu/',
     phone: '',
-    email: 'arifulalamszn@gmail.com',
+    email: 'yuchen98@g.ucla.edu',
   },
   resume: {
     fileUrl:
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+      'https://raw.githubusercontent.com/vinares/YuchenLiu/main/src/myFiles/SDE3.6.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
-    'PHP',
-    'Laravel',
-    'JavaScript',
-    'React.js',
-    'Node.js',
-    'Nest.js',
-    'MySQL',
-    'PostgreSQL',
+    'Python (6 yoe)',
+    'Golang (2 yoe)',
+    'C++',
+    'Java',
+    'C',
+    'Bash',
+    'Jenkins',
+    'AWS Cloud',
+    'GCP',
+    'Container',
+    'Linux',
+    'Postman',
     'Git',
-    'Docker',
-    'PHPUnit',
-    'CSS',
-    'Antd',
-    'Tailwind',
+    'MySQL',
+    'Redis',
+    'LaTeX',
+    'PyTorch',
+    'React',
+    'Groovy',
+    'Ginkgo'
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'MemVerge, Inc.',
+      position: 'Software Engineer',
+      from: 'May 2023',
       to: 'Present',
-      companyLink: 'https://example.com',
+      companyLink: 'https://memverge.com/',
     },
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'Meta Platform, Inc.',
+      position: 'Software Engineer Intern',
+      from: 'June 2022',
+      to: 'September 2022',
+      companyLink: 'https://about.meta.com/',
     },
   ],
+  /*
   certifications: [
     {
       name: 'Lorem ipsum',
@@ -122,20 +133,22 @@ const CONFIG = {
       link: 'https://example.com',
     },
   ],
+  */
   educations: [
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2015',
-      to: '2019',
+      institution: 'University of California, Los Angeles',
+      degree: 'Master of Computer Science',
+      from: '2021',
+      to: '2023',
     },
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
+      institution: 'Dalian University of Technology',
+      degree: 'Bachelor of Electronic and Information Engineering (English Intensive)',
+      from: '2016',
+      to: '2020',
     },
   ],
+  /*
   publications: [
     {
       title: 'Publication Title',
@@ -156,7 +169,9 @@ const CONFIG = {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
   ],
+  */
   // Display articles from your medium or dev account. (Optional)
+  /*
   blog: {
     source: 'dev', // medium | dev
     username: 'arifszn', // to hide blog section, keep it empty
@@ -170,8 +185,9 @@ const CONFIG = {
     id: '',
     snippetVersion: 6,
   },
+  */
   themeConfig: {
-    defaultTheme: 'lofi',
+    defaultTheme: 'halloween',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode
@@ -234,6 +250,7 @@ const CONFIG = {
   },
 
   // Optional Footer. Supports plain text or HTML.
+  /*
   footer: `Made with <a 
       class="text-primary" href="https://github.com/arifszn/gitprofile"
       target="_blank"
@@ -241,6 +258,7 @@ const CONFIG = {
     >GitProfile</a> and ❤️`,
 
   enablePWA: true,
+  */
 };
 
 export default CONFIG;
