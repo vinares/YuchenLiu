@@ -19,7 +19,10 @@ import {
   FaTelegram,
   FaYoutube,
 } from 'react-icons/fa';
-import { FaSquareThreads } from 'react-icons/fa6';
+import { SiLeetcode } from "react-icons/si";
+import { 
+  FaSquareThreads,
+ } from 'react-icons/fa6';
 import { MdLocationOn } from 'react-icons/md';
 import { RiMailFill, RiPhoneFill } from 'react-icons/ri';
 import { SiResearchgate, SiTwitter, SiUdemy } from 'react-icons/si';
@@ -334,6 +337,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                       ? `http://${social.website}`
                       : social.website
                   }
+                />
+              )}
+              {social?.leetcode && (
+                <ListItem
+                  icon={<SiLeetcode />}
+                  title="LeetCode:"
+                  value={social.leetcode}
+                  link={`https://leetcode.com/u/${social.leetcode}`}
                 />
               )}
               {social?.skype && (

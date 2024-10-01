@@ -81,6 +81,7 @@ const CONFIG = {
     website: 'https://vinares.github.io/YuchenLiu/',
     phone: '',
     email: 'yuchen98@g.ucla.edu',
+    leetcode: 'vinaresUS'
   },
   resume: {
     fileUrl:
