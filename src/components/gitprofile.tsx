@@ -46,6 +46,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
+  //const [leetcodeData, setLeetcodeData] = useState<LeetcodeData | null>(null);
 
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
@@ -130,6 +131,28 @@ const GitProfile = ({ config }: { config: Config }) => {
     getGithubProjects,
   ]);
 
+  /*
+  const loadLeetcodeData = useCallback(async () => {
+    try {
+      setLoading(true);
+  
+      const response = await axios.get(
+        `https://alfa-leetcode-api.onrender.com/${sanitizedConfig.social.leetcode}/calendar`,
+      );
+      const data = response.data;
+      
+      
+    } catch (error) {
+      handleError(error as AxiosError | Error);
+    } finally {
+      setLoading(false);
+    }
+  }, [
+    sanitizedConfig.social.leetcode,
+    sanitizedConfig.leetcode.calender,
+  ]);
+
+    */
   useEffect(() => {
     if (Object.keys(sanitizedConfig).length === 0) {
       setError(INVALID_CONFIG_ERROR);
@@ -138,6 +161,7 @@ const GitProfile = ({ config }: { config: Config }) => {
       setTheme(getInitialTheme(sanitizedConfig.themeConfig));
       setupHotjar(sanitizedConfig.hotjar);
       loadData();
+      //loadLeetcodeData();
     }
   }, [sanitizedConfig, loadData]);
 
@@ -145,39 +169,39 @@ const GitProfile = ({ config }: { config: Config }) => {
     theme && document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const handleError = (error: AxiosError | Error): void => {
-    console.error('Error:', error);
+  function handleError(error: AxiosError | Error): void {
+  console.error('Error:', error);
 
-    if (error instanceof AxiosError) {
-      try {
-        const reset = formatDistance(
-          new Date(error.response?.headers?.['x-ratelimit-reset'] * 1000),
-          new Date(),
-          { addSuffix: true },
-        );
+  if (error instanceof AxiosError) {
+    try {
+      const reset = formatDistance(
+        new Date(error.response?.headers?.['x-ratelimit-reset'] * 1000),
+        new Date(),
+        { addSuffix: true }
+      );
 
-        if (typeof error.response?.status === 'number') {
-          switch (error.response.status) {
-            case 403:
-              setError(setTooManyRequestError(reset));
-              break;
-            case 404:
-              setError(INVALID_GITHUB_USERNAME_ERROR);
-              break;
-            default:
-              setError(GENERIC_ERROR);
-              break;
-          }
-        } else {
-          setError(GENERIC_ERROR);
+      if (typeof error.response?.status === 'number') {
+        switch (error.response.status) {
+          case 403:
+            setError(setTooManyRequestError(reset));
+            break;
+          case 404:
+            setError(INVALID_GITHUB_USERNAME_ERROR);
+            break;
+          default:
+            setError(GENERIC_ERROR);
+            break;
         }
-      } catch (innerError) {
+      } else {
         setError(GENERIC_ERROR);
       }
-    } else {
+    } catch (innerError) {
       setError(GENERIC_ERROR);
     }
-  };
+  } else {
+    setError(GENERIC_ERROR);
+  }
+}
 
   return (
     <HelmetProvider>
@@ -211,6 +235,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                       loading={loading}
                       avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
                       resumeFileUrl={sanitizedConfig.resume.fileUrl}
+                      systemDesignNoteUrl={sanitizedConfig.systemDesignNote.notionUrl}
                     />
                     <DetailsCard
                       profile={profile}

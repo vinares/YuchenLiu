@@ -220,6 +220,13 @@ interface Resume {
   fileUrl?: string;
 }
 
+interface SystemDesignNote {
+  /**
+   * Notion URL
+   */
+  notionUrl?: string;
+}
+
 interface Experience {
   company?: string;
   position?: string;
@@ -413,6 +420,11 @@ interface Config {
    * Resume
    */
   resume?: Resume;
+
+  /**
+   * System Design Note
+   */
+  systemDesignNote?: SystemDesignNote; 
 
   /**
    * Google Analytics config

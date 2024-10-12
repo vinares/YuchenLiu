@@ -8,6 +8,7 @@ interface AvatarCardProps {
   loading: boolean;
   avatarRing: boolean;
   resumeFileUrl?: string;
+  systemDesignNoteUrl?: string; // Added this prop
 }
 
 /**
@@ -16,6 +17,7 @@ interface AvatarCardProps {
  * @param loading - A boolean indicating if the profile is loading.
  * @param avatarRing - A boolean indicating if the avatar should have a ring.
  * @param resumeFileUrl - The URL of the resume file.
+ * @param systemDesignNoteUrl - The URL for system design notes.
  * @returns JSX element representing the AvatarCard.
  */
 const AvatarCard: React.FC<AvatarCardProps> = ({
@@ -23,6 +25,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   loading,
   avatarRing,
   resumeFileUrl,
+  systemDesignNoteUrl, // Added this prop to the function signature
 }): JSX.Element => {
   return (
     <div className="card shadow-lg compact bg-base-100">
@@ -89,7 +92,22 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               download
               rel="noreferrer"
             >
-              Download Resume
+              Download My Resume
+            </a>
+          ))}
+        {systemDesignNoteUrl && 
+          (loading ? (
+            <div className="mt-6">
+              {skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}
+            </div>
+          ) : (
+            <a
+              href={systemDesignNoteUrl}
+              target="_blank"
+              className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
+              rel="noreferrer"
+            >
+              System Design Notes
             </a>
           ))}
       </div>
