@@ -29,7 +29,7 @@ export const getSanitizedConfig = (
   try {
     return {
       github: {
-        username: config.github.username,
+        username: config?.github?.username || '',
       },
       projects: {
         github: {
@@ -85,6 +85,9 @@ export const getSanitizedConfig = (
       },
       resume: {
         fileUrl: config?.resume?.fileUrl || '',
+      },
+      systemDesignNote: {
+        notionUrl: config.systemDesignNote?.notionUrl || '',
       },
       skills: config?.skills || [],
       experiences:
@@ -153,6 +156,7 @@ export const getSanitizedConfig = (
       enablePWA: config?.enablePWA ?? true,
     };
   } catch (error) {
+    console.error(error);
     return {};
   }
 };

@@ -87,6 +87,9 @@ const CONFIG = {
     fileUrl:
       'https://raw.githubusercontent.com/vinares/YuchenLiu/main/src/myFiles/SDE3.6.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
+  systemDesignNote: {
+    notionUrl: 'https://glittery-fossa-f4b.notion.site/System-Design-11a02a252fdb8095a9a1e4bbc1b699ee',
+  },
   skills: [
     'Python (6 yoe)',
     'Golang (2 yoe)',
@@ -257,9 +260,9 @@ const CONFIG = {
       target="_blank"
       rel="noreferrer"
     >GitProfile</a> and ❤️`,
-
-  enablePWA: true,
   */
+  enablePWA: true,
+
 };
 
 export default CONFIG;

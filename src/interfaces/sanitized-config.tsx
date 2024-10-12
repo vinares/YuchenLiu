@@ -70,6 +70,10 @@ export interface SanitizedResume {
   fileUrl?: string;
 }
 
+export interface SanitizedSystemDesignNote {
+  notionUrl?: string;
+}
+
 export interface SanitizedExperience {
   company?: string;
   position?: string;
@@ -142,6 +146,7 @@ export interface SanitizedConfig {
   seo: SanitizedSEO;
   social: SanitizedSocial;
   resume: SanitizedResume;
+  systemDesignNote: SanitizedSystemDesignNote;
   skills: Array<string>;
   experiences: Array<SanitizedExperience>;
   educations: Array<SanitizedEducation>;
