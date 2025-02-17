@@ -1,4 +1,30 @@
 // gitprofile.config.ts
+const currentYear = new Date().getFullYear();
+const skills = [
+  `Python (${currentYear - 2018} yoe)`,
+  `Golang (${currentYear - 2022} yoe)`,
+  'C++',
+  'Java',
+  'C',
+  'Bash',
+  'Kubernetes',
+  'Jenkins',
+  'CICD',
+  'AWS Cloud',
+  'Container',
+  'Linux',
+  'Postman',
+  'Docker',
+  'Git',
+  'MySQL',
+  'Redis',
+  'LaTeX',
+  'PyTorch',
+  'React',
+  'Groovy',
+  'Ginkgo'
+];
+
 
 const CONFIG = {
   github: {
@@ -61,7 +87,7 @@ const CONFIG = {
     imageURL: '',
   },
   social: {
-    linkedin: 'lycty',
+    linkedin: 'yclou',
     twitter: '',
     mastodon: '',
     researchGate: '',
@@ -90,28 +116,7 @@ const CONFIG = {
   systemDesignNote: {
     notionUrl: 'https://glittery-fossa-f4b.notion.site/System-Design-11a02a252fdb8095a9a1e4bbc1b699ee',
   },
-  skills: [
-    'Python (6 yoe)',
-    'Golang (2 yoe)',
-    'C++',
-    'Java',
-    'C',
-    'Bash',
-    'Jenkins',
-    'AWS Cloud',
-    'GCP',
-    'Container',
-    'Linux',
-    'Postman',
-    'Git',
-    'MySQL',
-    'Redis',
-    'LaTeX',
-    'PyTorch',
-    'React',
-    'Groovy',
-    'Ginkgo'
-  ],
+  skills:  skills,
   experiences: [
     {
       company: 'MemVerge, Inc.',
