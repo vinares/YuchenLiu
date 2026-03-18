@@ -30,6 +30,7 @@ import ExternalProjectCard from './external-project-card';
 import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
+import LeetcodeCard from './leetcode-card';
 
 /**
  * Renders the GitProfile component.
@@ -46,7 +47,6 @@ const GitProfile = ({ config }: { config: Config }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
-  //const [leetcodeData, setLeetcodeData] = useState<LeetcodeData | null>(null);
 
   const getGithubProjects = useCallback(
     async (publicRepoCount: number): Promise<GithubProject[]> => {
@@ -131,28 +131,6 @@ const GitProfile = ({ config }: { config: Config }) => {
     getGithubProjects,
   ]);
 
-  /*
-  const loadLeetcodeData = useCallback(async () => {
-    try {
-      setLoading(true);
-  
-      const response = await axios.get(
-        `https://alfa-leetcode-api.onrender.com/${sanitizedConfig.social.leetcode}/calendar`,
-      );
-      const data = response.data;
-      
-      
-    } catch (error) {
-      handleError(error as AxiosError | Error);
-    } finally {
-      setLoading(false);
-    }
-  }, [
-    sanitizedConfig.social.leetcode,
-    sanitizedConfig.leetcode.calender,
-  ]);
-
-    */
   useEffect(() => {
     if (Object.keys(sanitizedConfig).length === 0) {
       setError(INVALID_CONFIG_ERROR);
@@ -161,7 +139,6 @@ const GitProfile = ({ config }: { config: Config }) => {
       setTheme(getInitialTheme(sanitizedConfig.themeConfig));
       setupHotjar(sanitizedConfig.hotjar);
       loadData();
-      //loadLeetcodeData();
     }
   }, [sanitizedConfig, loadData]);
 
@@ -243,32 +220,37 @@ const GitProfile = ({ config }: { config: Config }) => {
                       github={sanitizedConfig.github}
                       social={sanitizedConfig.social}
                     />
-                    {sanitizedConfig.experiences.length !== 0 && (
-                      <ExperienceCard
-                        loading={loading}
-                        experiences={sanitizedConfig.experiences}
-                      />
-                    )}
                     {sanitizedConfig.certifications.length !== 0 && (
                       <CertificationCard
                         loading={loading}
                         certifications={sanitizedConfig.certifications}
                       />
                     )}
+                  </div>
+                </div>
+                <div className="lg:col-span-2 col-span-1">
+                  <div className="grid grid-cols-1 gap-6">
                     {sanitizedConfig.educations.length !== 0 && (
                       <EducationCard
                         loading={loading}
                         educations={sanitizedConfig.educations}
                       />
                     )}
-                  </div>
-                </div>
-                <div className="lg:col-span-2 col-span-1">
-                  <div className="grid grid-cols-1 gap-6">                    
-                    {sanitizedConfig.skills.length !== 0 && (
+                    {sanitizedConfig.experiences.length !== 0 && (
+                      <ExperienceCard
+                        loading={loading}
+                        experiences={sanitizedConfig.experiences}
+                      />
+                    )}
+                    {sanitizedConfig.skills.length > 0 && (
                       <SkillCard
                         loading={loading}
                         skills={sanitizedConfig.skills}
+                      />
+                    )}
+                    {sanitizedConfig.social.leetcode && (
+                      <LeetcodeCard
+                        username={sanitizedConfig.social.leetcode}
                       />
                     )}
                     {sanitizedConfig.projects.github.display && (

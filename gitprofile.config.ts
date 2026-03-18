@@ -1,29 +1,30 @@
 // gitprofile.config.ts
 const currentYear = new Date().getFullYear();
 const skills = [
-  `Python (${currentYear - 2018} yoe)`,
-  `Golang (${currentYear - 2022} yoe)`,
-  'C++',
-  'Java',
-  'C',
-  'Bash',
-  'Kubernetes',
-  'Jenkins',
-  'CICD',
-  'AWS',
-  'Container',
-  'Linux',
-  'Postman',
-  'Docker',
-  'Git',
-  'MySQL',
-  'Neo4j',
-  'Redis',
-  'LaTeX',
-  'PyTorch',
-  'React',
-  'Groovy',
-  'Ginkgo'
+  {
+    category: 'Languages',
+    items: [
+      `Python (${currentYear - 2018} yoe)`,
+      'Golang (3 yoe)',
+      'C++',
+      'Java',
+      'C',
+      'Bash',
+      'Groovy',
+    ],
+  },
+  {
+    category: 'Infrastructure & DevOps',
+    items: ['Kubernetes', 'Docker', 'Jenkins', 'CICD', 'AWS', 'Linux', 'Container'],
+  },
+  {
+    category: 'Databases',
+    items: ['MySQL', 'Neo4j', 'Redis'],
+  },
+  {
+    category: 'Frameworks & Tools',
+    items: ['React', 'PyTorch', 'Ginkgo', 'Git', 'Postman', 'LaTeX'],
+  },
 ];
 
 
@@ -120,14 +121,21 @@ const CONFIG = {
   skills:  skills,
   experiences: [
     {
+      company: 'Meta Platforms, Inc.',
+      position: 'Software Engineer',
+      from: 'January 2026',
+      to: 'Present',
+      companyLink: 'https://about.meta.com/',
+    },
+    {
       company: 'MemVerge, Inc.',
       position: 'Software Engineer',
       from: 'May 2023',
-      to: 'Present',
+      to: 'December 2025',
       companyLink: 'https://memverge.com/',
     },
     {
-      company: 'Meta Platform, Inc.',
+      company: 'Meta Platforms, Inc.',
       position: 'Software Engineer Intern',
       from: 'June 2022',
       to: 'September 2022',
@@ -197,7 +205,7 @@ const CONFIG = {
   },
   */
   themeConfig: {
-    defaultTheme: 'halloween',
+    defaultTheme: 'cupcake',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode

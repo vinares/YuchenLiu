@@ -147,7 +147,7 @@ export interface SanitizedConfig {
   social: SanitizedSocial;
   resume: SanitizedResume;
   systemDesignNote: SanitizedSystemDesignNote;
-  skills: Array<string>;
+  skills: Array<{ category: string; items: string[] }>;
   experiences: Array<SanitizedExperience>;
   educations: Array<SanitizedEducation>;
   certifications: Array<SanitizedCertification>;

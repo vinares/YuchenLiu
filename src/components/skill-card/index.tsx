@@ -1,11 +1,16 @@
 import { skeleton } from '../../utils';
 
+interface SkillCategory {
+  category: string;
+  items: string[];
+}
+
 const SkillCard = ({
   loading,
   skills,
 }: {
   loading: boolean;
-  skills: string[];
+  skills: SkillCategory[];
 }) => {
   const renderSkeleton = () => {
     const array = [];
@@ -33,18 +38,31 @@ const SkillCard = ({
           </h5>
         </div>
         <div className="p-3 flow-root">
-          <div className="-m-1 flex flex-wrap justify-center">
-            {loading
-              ? renderSkeleton()
-              : skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="m-1 text-xs inline-flex items-center font-bold leading-sm px-3 py-1 badge-primary bg-opacity-90 rounded-full"
-                  >
-                    {skill}
+          {loading ? (
+            <div className="-m-1 flex flex-wrap justify-center">
+              {renderSkeleton()}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {skills.map((group, groupIndex) => (
+                <div key={groupIndex}>
+                  <h6 className="text-sm font-semibold text-base-content opacity-60 mb-2 ml-1">
+                    {group.category}
+                  </h6>
+                  <div className="-m-1 flex flex-wrap">
+                    {group.items.map((skill, index) => (
+                      <div
+                        key={index}
+                        className="m-1 text-xs inline-flex items-center font-bold leading-sm px-3 py-1 badge-primary bg-opacity-90 rounded-full"
+                      >
+                        {skill}
+                      </div>
+                    ))}
                   </div>
-                ))}
-          </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

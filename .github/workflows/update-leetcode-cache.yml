@@ -1,0 +1,63 @@
+name: Update LeetCode Cache
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # 1st of every month at midnight UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch LeetCode data
+        env:
+          LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
+        run: |
+          USERNAME="vinaresUS"
+
+          SOLVED=$(curl -sf 'https://leetcode.com/graphql' \
+            -H 'Content-Type: application/json' \
+            -H "Cookie: LEETCODE_SESSION=$LEETCODE_SESSION" \
+            -d "{\"query\":\"{ matchedUser(username: \\\"${USERNAME}\\\") { submitStatsGlobal { acSubmissionNum { difficulty count } } } }\"}")
+
+          CALENDAR=$(curl -sf 'https://leetcode.com/graphql' \
+            -H 'Content-Type: application/json' \
+            -H "Cookie: LEETCODE_SESSION=$LEETCODE_SESSION" \
+            -d "{\"query\":\"{ matchedUser(username: \\\"${USERNAME}\\\") { submissionCalendar } }\"}")
+
+          if [ -z "$SOLVED" ] || [ -z "$CALENDAR" ]; then
+            echo "API returned empty response, skipping update"
+            exit 0
+          fi
+
+          # Extract stats from GraphQL response
+          STATS=$(echo "$SOLVED" | jq '{
+            solvedProblem: .data.matchedUser.submitStatsGlobal.acSubmissionNum[0].count,
+            easySolved: .data.matchedUser.submitStatsGlobal.acSubmissionNum[1].count,
+            mediumSolved: .data.matchedUser.submitStatsGlobal.acSubmissionNum[2].count,
+            hardSolved: .data.matchedUser.submitStatsGlobal.acSubmissionNum[3].count
+          }')
+
+          CAL=$(echo "$CALENDAR" | jq '.data.matchedUser')
+
+          jq -n \
+            --argjson solved "$STATS" \
+            --argjson calendar "$CAL" \
+            --arg updated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{ solved: $solved, calendar: $calendar, updatedAt: $updated }' \
+            > public/leetcode-cache.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/leetcode-cache.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: update leetcode cache"
+          git push

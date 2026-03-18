@@ -394,7 +394,7 @@ interface Config {
   /**
    * Skill list
    */
-  skills?: Array<string>;
+  skills?: Array<{ category: string; items: string[] }>;
 
   /**
    * Experience list
