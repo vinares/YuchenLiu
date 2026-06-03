@@ -20,20 +20,25 @@ jobs:
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
         run: |
           USERNAME="vinaresUS"
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 
           SOLVED=$(curl -sf 'https://leetcode.com/graphql' \
             -H 'Content-Type: application/json' \
+            -H "User-Agent: $UA" \
+            -H "Referer: https://leetcode.com/${USERNAME}/" \
             -H "Cookie: LEETCODE_SESSION=$LEETCODE_SESSION" \
             -d "{\"query\":\"{ matchedUser(username: \\\"${USERNAME}\\\") { submitStatsGlobal { acSubmissionNum { difficulty count } } } }\"}")
 
           CALENDAR=$(curl -sf 'https://leetcode.com/graphql' \
             -H 'Content-Type: application/json' \
+            -H "User-Agent: $UA" \
+            -H "Referer: https://leetcode.com/${USERNAME}/" \
             -H "Cookie: LEETCODE_SESSION=$LEETCODE_SESSION" \
             -d "{\"query\":\"{ matchedUser(username: \\\"${USERNAME}\\\") { submissionCalendar } }\"}")
 
           if [ -z "$SOLVED" ] || [ -z "$CALENDAR" ]; then
-            echo "API returned empty response, skipping update"
-            exit 0
+            echo "::error::LeetCode API returned an empty response (likely rate-limited or blocked from the runner)"
+            exit 1
           fi
 
           # Extract stats from GraphQL response
@@ -45,6 +50,13 @@ jobs:
           }')
 
           CAL=$(echo "$CALENDAR" | jq '.data.matchedUser')
+
+          if [ "$(echo "$STATS" | jq -r '.solvedProblem')" = "null" ] || [ "$(echo "$CAL" | jq -r '.submissionCalendar')" = "null" ]; then
+            echo "::error::Could not parse LeetCode response (user not found or schema changed)"
+            echo "solved: $SOLVED"
+            echo "calendar: $CALENDAR"
+            exit 1
+          fi
 
           jq -n \
             --argjson solved "$STATS" \
